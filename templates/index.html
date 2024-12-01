@@ -15,7 +15,21 @@
     <title>Address analyzing tool</title>
   </head>
   <body>
-    <h1 class="text-2xl text-center">Hola mundo</h1>
+    <nav class="py-4 w-full bg-gray-400">
+    </nav>
+    <div class="mx-2 mt-6">
+      <form action="{{ url_for('vt.analize_address') }}" method="post">
+        <div class="flex justify-between items-center my-4">
+          <div class="w-3/4 mx-4">
+            <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-blue-500 block w-full p-2.5" type="text" name="address" id="address" placeholder="Escribe una dirección IP, URL, Dominio o Hash" required>
+          </div>
+          <div class="w-1/4 mx-4 flex justify-end items-center">
+            <button type="submit" class="mx-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Analizar</button>
+            <button type="button" class="mx-2 bg-gray-200 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Subir un archivo</button>
+          </div>
+        </div>
+      </form>
+    </div>
     <script type="module" src="{{ asset('script.js') }}"></script>
   </body>
 </html>

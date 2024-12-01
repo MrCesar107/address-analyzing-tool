@@ -1,5 +1,6 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, url_for
 from assets_blueprint import assets_blueprint
+from vt_blueprint import vt_blueprint
 
 app = Flask(
   __name__,
@@ -10,6 +11,8 @@ app = Flask(
 
 # Provide Vite context processors and static assets directory
 app.register_blueprint(assets_blueprint)
+
+app.register_blueprint(vt_blueprint)
 
 @app.get("/")
 def index():
