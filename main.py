@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, url_for
 from assets_blueprint import assets_blueprint
-from vt_blueprint import vt_blueprint
+from blueprints.vt_blueprint import vt_blueprint
 
 app = Flask(
   __name__,
