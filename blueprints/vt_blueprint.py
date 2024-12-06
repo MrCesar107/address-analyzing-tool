@@ -1,6 +1,5 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, redirect, url_for, render_template, session, make_response
 import requests
-import vt
 import os
 
 vt_blueprint = Blueprint("vt", __name__, url_prefix="/vt")
@@ -8,8 +7,11 @@ vt_blueprint = Blueprint("vt", __name__, url_prefix="/vt")
 @vt_blueprint.route("/analize_address", methods=["POST"])
 def analize_address():
   address = request.form.get("address")
-  analysis = analize_url(address)
-  return analysis
+  session['url'] = address
+  response = redirect(url_for("index"))
+  response.set_cookie("from_form", "true", max_age=0)
+
+  return response
 
 @vt_blueprint.route("/get_url_analysis/<analysis_id>", methods=["GET"])
 def get_url_analysis(analysis_id):

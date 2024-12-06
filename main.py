@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, request, session, make_response
 from dotenv import load_dotenv
 from assets_blueprint import assets_blueprint
 from blueprints.vt_blueprint import vt_blueprint
@@ -13,7 +13,7 @@ app = Flask(
   template_folder="templates"
 )
 
-app.config['VT_API_KEY'] = os.getenv("VT_API_KEY")
+app.secret_key = os.getenv("FLASK_SECRET_KEY")
 app.config['VT_URL_ENDPOINT'] = os.getenv("VT_URL_ENDPOINT")
 
 # Provide Vite context processors and static assets directory
@@ -23,7 +23,15 @@ app.register_blueprint(vt_blueprint)
 
 @app.get("/")
 def index():
-  return render_template("index.html")
+  from_form = request.cookies.get("from_form")
+  response = make_response(render_template("analysis_section.html"))
+
+  if not from_form:
+    session.clear()
+  else:
+    response.delete_cookie("from_form")
+
+  return response
 
 @app.get("/test")
 def test():
